@@ -43,8 +43,9 @@ Get Wheather by city in angular with API Service (openweathermap.org).
 5. src/app/weather.component.ts => import { ApixuService } from "../apixu.service"; => public weatherData: any; => private apixuService: ApixuService => sendToAPIXU(formValues){this.apixuService.getWeather(formValues.location).subscribe(data => this.weatherData = data);}
 
 ### Html Data
-1. File (src/app/weather/weather.component.html)
-2. State = {{this.weatherData.list[0].weather[0].main}}
-3. Icon = openweathermap.org/img/w/{{this.weatherData.list[0].weather[0].icon}}.png
-4. TempCel = {{this.weatherData.list[0].main.temp-273.18 | number : '1.0-0'}} &#8451;
-5. Date = {{this.weatherData.list[0].dt_txt | date: 'mediumDate'}}
+1. Create html data by weatherData json from service
+2. src/app/weather/weather.component.html
+3. State = {{this.weatherData.list[0].weather[0].main}}
+4. Icon = openweathermap.org/img/w/{{this.weatherData.list[0].weather[0].icon}}.png
+5. TempCel = {{this.weatherData.list[0].main.temp-273.18 | number : '1.0-0'}} &#8451;
+6. Date = {{this.weatherData.list[0].dt_txt | date: 'mediumDate'}}
