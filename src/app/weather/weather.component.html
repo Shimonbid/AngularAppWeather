@@ -1,0 +1,71 @@
+<div class="container">
+  
+<div class="container row col-sm-4">
+<h1>Wheather City</h1>
+
+<form
+[formGroup]="weatherSearchForm"
+(ngSubmit)="sendToAPIXU(weatherSearchForm.value)"
+>
+<div class="form-group">
+  <input
+    class="form-control"
+    type="text"
+    id="weatherLocation"
+    aria-describedby="weatherLocation"
+    placeholder="Please input a Location"
+    formControlName="location"
+  />
+</div>
+
+  <button type="submit" class="btn btn-success btn-md">
+    Submit
+  </button>
+</form>
+</div>
+
+
+<div class="container row">
+  <div class="col-sm container p-3 my-3 bg-primary text-white">           
+    <h1>
+      {{this.weatherData.list[0].weather[0].main}}
+      <img src ="http://openweathermap.org/img/w/{{this.weatherData.list[0].weather[0].icon}}.png" />
+    </h1>
+    <h2>{{this.weatherData.list[0].main.temp-273.18 | number : '1.0-0'}} &#8451;</h2>
+    <h3>{{this.weatherData.list[0].dt_txt | date: 'mediumDate'}}</h3>
+  </div>
+  <div class="col-sm container p-3 my-3 bg-primary text-white">    
+    <h1>
+      {{this.weatherData.list[8].weather[0].main}}
+      <img src ="http://openweathermap.org/img/w/{{this.weatherData.list[8].weather[0].icon}}.png" />
+    </h1>
+    <h2>{{this.weatherData.list[8].main.temp-273.18 | number : '1.0-0'}} &#8451;</h2>
+    <h3>{{this.weatherData.list[8].dt_txt | date: 'mediumDate'}}</h3>
+  </div>
+  <div class="col-sm container p-3 my-3 bg-primary text-white">    
+    <h1>
+      {{this.weatherData.list[16].weather[0].main}}
+      <img src ="http://openweathermap.org/img/w/{{this.weatherData.list[16].weather[0].icon}}.png" />
+    </h1>
+    <h2>{{this.weatherData.list[16].main.temp-273.18 | number : '1.0-0'}} &#8451;</h2>
+    <h3>{{this.weatherData.list[16].dt_txt | date: 'mediumDate'}}</h3>
+  </div>
+  <div class="col-sm container p-3 my-3 bg-primary text-white">    
+    <h1>
+      {{this.weatherData.list[24].weather[0].main}}
+      <img src ="http://openweathermap.org/img/w/{{this.weatherData.list[24].weather[0].icon}}.png" />
+    </h1>
+    <h2>{{this.weatherData.list[24].main.temp-273.18 | number : '1.0-0'}} &#8451;</h2>
+    <h3>{{this.weatherData.list[24].dt_txt | date: 'mediumDate'}}</h3>
+  </div>
+  <div class="col-sm container p-3 my-3 bg-primary text-white">    
+    <h1>
+      {{this.weatherData.list[32].weather[0].main}}
+      <img src ="http://openweathermap.org/img/w/{{this.weatherData.list[32].weather[0].icon}}.png" />
+    </h1>
+    <h2>{{this.weatherData.list[32].main.temp-273.18 | number : '1.0-0'}} &#8451;</h2>
+    <h3>{{this.weatherData.list[32].dt_txt | date: 'mediumDate'}}</h3>
+  </div>
+</div>
+
+</div>
