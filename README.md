@@ -17,62 +17,30 @@ Get Wheather by city in angular with API Service (openweathermap.org).
 4. cd NameApp => code . => ng serve --o
 
 ### Packages
-1. cmd>> npm install --save jquery popper.js bootstrap
-2. angular.json: 
-3."styles": [
-    "node_modules/bootstrap/dist/css/bootstrap.css",
-     "src/styles.css"
-],
-4."scripts": [
-    "node_modules/jquery/dist/jquery.slim.js",
-    "node_modules/popper.js/dist/umd/popper.js",
-    "node_modules/bootstrap/dist/js/bootstrap.js"
-]},
+1. Add bootstrap.css, bootstrap.js, jquery, popper.js
+2. cmd>> npm install --save jquery popper.js bootstrap
+3. angular.json => "styles" => "node_modules/bootstrap/dist/css/bootstrap.css"
+4. angular.json => "scripts" => "node_modules/jquery/dist/jquery.slim.js", "node_modules/popper.js/dist/umd/popper.js", "node_modules/bootstrap/dist/js/bootstrap.js"
 
 ### Weather Component
-1. cmd>> ng generate component weather
-2. File Create (src/app/routes.ts)
-3. import { Routes } from "@angular/router";
-4. import { WeatherComponent } from "./weather/weather.component";
-5. export const allAppRoutes: Routes = [{ path: '', component: WeatherComponent }];
-6. File (src/app/app.module.ts)
-7. import {WeatherComponent} from './weather/weather.component';
-8. import {RouterModule} from '@angular/router';
-9. import {allAppRoutes} from './routes';
-10. @NgModule({declarations:[],imports: [BrowserModule,RouterModule.forRoot(allAppRoutes)]
-11. File (src/app/app.component.html)
-12. router-outlet>/router-outlet>"
+1. Create weather component and routes 
+2. create weather => cmd>> ng generate component weather
+3. create file => src/app/routes.ts => import { Routes } from "@angular/router"; => import { WeatherComponent } from "./weather/weather.component"; => export const allAppRoutes: Routes = [{ path: '', component: WeatherComponent }];
+4. src/app/app.module.ts => import {WeatherComponent} from './weather/weather.component'; => import {RouterModule} from '@angular/router'; => import {allAppRoutes} from './routes'; => RouterModule.forRoot(allAppRoutes)
+5. src/app/app.component.html => router-outlet></router-outlet
 
 ### Form Wired
-1. File (src/app/weather/weather.component.html)
-2. File (src/app/app.module.ts)
-3. import { ReactiveFormsModule } from '@angular/forms';
-4. RouterModule.forRoot(allAppRoutes),ReactiveFormsModule
-5. File (src/app/weather/weather.component.ts)
-6. import { FormBuilder, FormGroup } from '@angular/forms';
-7. public weatherSearchForm: FormGroup;
-9. constructor(private formBuilder: FormBuilder) {this.weatherSearchForm = this.formBuilder.group({location: ['']});
-10. File (src/app/weather/weather.component.html)
-11. form [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
-12. formControlName="location"
+1. Create form wired for service
+2. src/app/app.module.ts => import { ReactiveFormsModule } from '@angular/forms'; => ReactiveFormsModule
+3. src/app/weather/weather.component.ts => import { FormBuilder, FormGroup } from '@angular/forms'; => public weatherSearchForm: FormGroup; => constructor(private formBuilder: FormBuilder) {this.weatherSearchForm = this.formBuilder.group({location: ['']});
+4. src/app/weather/weather.component.html => add form => [formGroup]="weatherSearchForm" => (ngSubmit)="sendToAPIXU(weatherSearchForm.value)" => formControlName="location"
 
 ### APIXU API
-1. File (src/app/app.module.ts)
-2. import { HttpClientModule } from '@angular/common/http';
-3. HttpClientModule
-4. cmd>> ng g service apixu
-5. File (src/app/app.module.ts)
-6. import { ApixuService } from "./apixu.service";
-7. @NgModule({providers: [ApixuService]
-8. File (src/app/apixu.service.ts)
-9. import { HttpClient } from '@angular/common/http';
-10. Regist openweathermap.org and get appid after 2 hours is ready
-11. GetWeater with link api.openweathermap.org/data/2.5/forecast?appid=123456&q= + location
-12. File (src/app/weather.component.ts)
-13. import { ApixuService } from "../apixu.service";
-14. public weatherData: any;
-15. private apixuService: ApixuService
-16. sendToAPIXU(formValues){this.apixuService.getWeather(formValues.location).subscribe(data => this.weatherData = data);}
+1. Create service with httpclient
+2. src/app/app.module.ts => import { HttpClientModule } from '@angular/common/http'; => HttpClientModule
+3. create service => cmd>> ng g service apixu
+4. src/app/apixu.service.ts => import { HttpClient } from '@angular/common/http'; => Regist openweathermap.org and get appid after 2 hours is ready => Link => getWeather(location: any) {return this.http.get("http://api.openweathermap.org/data/2.5/forecast?appid=123456&q=" + location);
+5. src/app/weather.component.ts => import { ApixuService } from "../apixu.service"; => public weatherData: any; => private apixuService: ApixuService => sendToAPIXU(formValues){this.apixuService.getWeather(formValues.location).subscribe(data => this.weatherData = data);}
 
 ### Html Data
 1. File (src/app/weather/weather.component.html)
