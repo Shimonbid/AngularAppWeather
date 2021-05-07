@@ -1,6 +1,6 @@
 # AngularAppWeather
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
+Get Wheather by city in angular with API Service (openweathermap.org).
 
 ## Development server
 
