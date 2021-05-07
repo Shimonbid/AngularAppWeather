@@ -41,7 +41,7 @@ Get Wheather by city in angular with API Service (openweathermap.org).
 9. import {allAppRoutes} from './routes';
 10. @NgModule({declarations:[],imports: [BrowserModule,RouterModule.forRoot(allAppRoutes)]
 11. File (src/app/app.component.html)
-12. <router-outlet></router-outlet>
+12. router-outlet>/router-outlet>"
 
 ### Form Wired
 1. File (src/app/weather/weather.component.html)
@@ -53,7 +53,7 @@ Get Wheather by city in angular with API Service (openweathermap.org).
 7. public weatherSearchForm: FormGroup;
 9. constructor(private formBuilder: FormBuilder) {this.weatherSearchForm = this.formBuilder.group({location: ['']});
 10. File (src/app/weather/weather.component.html)
-11. <form [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
+11. form [formGroup]="weatherSearchForm" (ngSubmit)="sendToAPIXU(weatherSearchForm.value)">
 12. formControlName="location"
 
 ### APIXU API
