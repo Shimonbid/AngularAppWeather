@@ -39,7 +39,7 @@ Get Wheather by city in angular with API Service (openweathermap.org).
 1. Create service with httpclient
 2. src/app/app.module.ts => import { HttpClientModule } from '@angular/common/http'; => HttpClientModule
 3. create service => cmd>> ng g service apixu
-4. src/app/apixu.service.ts => import { HttpClient } from '@angular/common/http'; => Regist openweathermap.org and get appid after 2 hours is ready => Link => getWeather(location: any) {return this.http.get("http://api.openweathermap.org/data/2.5/forecast?appid=123456&q=" + location);
+4. src/app/apixu.service.ts => import { HttpClient } from '@angular/common/http'; => Regist openweathermap.org and get appid after 2 hours is ready => Link => getWeather(location: any) {return this.http.get(api.openweathermap.org/data/2.5/forecast?appid=123456&q= + location);
 5. src/app/weather.component.ts => import { ApixuService } from "../apixu.service"; => public weatherData: any; => private apixuService: ApixuService => sendToAPIXU(formValues){this.apixuService.getWeather(formValues.location).subscribe(data => this.weatherData = data);}
 
 ### Html Data
