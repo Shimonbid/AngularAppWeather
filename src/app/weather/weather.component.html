@@ -1,28 +1,30 @@
 <div class="container">
   
-<div class="container row col-sm-4">
-<h1>Wheather City</h1>
-
 <form
 [formGroup]="weatherSearchForm"
 (ngSubmit)="sendToAPIXU(weatherSearchForm.value)"
 >
-<div class="form-group">
-  <input
-    class="form-control"
-    type="text"
-    id="weatherLocation"
-    aria-describedby="weatherLocation"
-    placeholder="Please input a Location"
-    formControlName="location"
-  />
-</div>
 
-  <button type="submit" class="btn btn-success btn-md">
-    Submit
-  </button>
-</form>
+<div class="container row">
+  <div class="col-sm-4 container p-3 my-3 bg-primary text-white">
+    <select formControlName="location" class="form-control">
+      <option value=''>Weather City</option>
+      <option>Tel Aviv</option>
+      <option>London</option>
+      <option>New York</option>
+      <option>Paris</option>
+      <option>Madrid</option>
+    </select>
+  </div>
+
+  <div class="col-sm-8 container p-3 my-3 bg-primary text-white">
+    <button type="submit" class="btn btn-success btn-md">
+      Submit
+    </button>
+  </div>
 </div>
+  
+</form>
 
 
 <div class="container row">

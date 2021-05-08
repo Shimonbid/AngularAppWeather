@@ -7,6 +7,7 @@ import { ApixuService } from "../apixu.service";
   templateUrl: "./weather.component.html",
   styleUrls: ["./weather.component.css"]
 })
+
 export class WeatherComponent implements OnInit {
   public weatherSearchForm: FormGroup;
   public weatherData: any;
