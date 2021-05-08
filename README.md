@@ -1,27 +1,51 @@
 # AngularAppWeather
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
+Get Wheather by city in angular with API Service (openweathermap.org).
 
-## Development server
+### The User Scenario
+1. User(city) => HttpClient(OpenWeathermapAPI)
+2. HttpClient(OpenWeathermapAPI) => Angular(json) => User(view)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### Development Enviroment
+1. Visual Studio Code (Client)
 
-## Code scaffolding
+## AngularApp (angular-app)
+### CreateApp
+1. Download and Install Javascript Library: nodejs.org
+2. npm install -g @angular/cli
+3. ng new NameApp => y,n,enter
+4. cd NameApp => code . => ng serve --o
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Packages
+1. Add bootstrap.css, bootstrap.js, jquery, popper.js
+2. cmd>> npm install --save jquery popper.js bootstrap
+3. angular.json => "styles" => "node_modules/bootstrap/dist/css/bootstrap.css"
+4. angular.json => "scripts" => "node_modules/jquery/dist/jquery.slim.js", "node_modules/popper.js/dist/umd/popper.js", "node_modules/bootstrap/dist/js/bootstrap.js"
 
-## Build
+### Weather Component
+1. Create weather component and routes 
+2. create weather => cmd>> ng generate component weather
+3. create file => src/app/routes.ts => import { Routes } from "@angular/router"; => import { WeatherComponent } from "./weather/weather.component"; => export const allAppRoutes: Routes = [{ path: '', component: WeatherComponent }];
+4. src/app/app.module.ts => import {WeatherComponent} from './weather/weather.component'; => import {RouterModule} from '@angular/router'; => import {allAppRoutes} from './routes'; => RouterModule.forRoot(allAppRoutes)
+5. src/app/app.component.html => router-outlet></router-outlet
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### Form Wired
+1. Create form wired for service
+2. src/app/app.module.ts => import { ReactiveFormsModule } from '@angular/forms'; => ReactiveFormsModule
+3. src/app/weather/weather.component.ts => import { FormBuilder, FormGroup } from '@angular/forms'; => public weatherSearchForm: FormGroup; => constructor(private formBuilder: FormBuilder) {this.weatherSearchForm = this.formBuilder.group({location: ['']});
+4. src/app/weather/weather.component.html => add form => [formGroup]="weatherSearchForm" => (ngSubmit)="sendToAPIXU(weatherSearchForm.value)" => formControlName="location"
 
-## Running unit tests
+### APIXU API
+1. Create service with httpclient
+2. src/app/app.module.ts => import { HttpClientModule } from '@angular/common/http'; => HttpClientModule
+3. create service => cmd>> ng g service apixu
+4. src/app/apixu.service.ts => import { HttpClient } from '@angular/common/http'; => Regist openweathermap.org and get appid after 2 hours is ready => Link => getWeather(location: any) {return this.http.get(api.openweathermap.org/data/2.5/forecast?appid=123456&q= + location);
+5. src/app/weather.component.ts => import { ApixuService } from "../apixu.service"; => public weatherData: any; => private apixuService: ApixuService => sendToAPIXU(formValues){this.apixuService.getWeather(formValues.location).subscribe(data => this.weatherData = data);}
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Html Data
+1. Create html data by weatherData json from service
+2. src/app/weather/weather.component.html
+3. State = {{this.weatherData.list[0].weather[0].main}}
+4. Icon = openweathermap.org/img/w/{{this.weatherData.list[0].weather[0].icon}}.png
+5. TempCel = {{this.weatherData.list[0].main.temp-273.18 | number : '1.0-0'}} &#8451;
+6. Date = {{this.weatherData.list[0].dt_txt | date: 'mediumDate'}}
