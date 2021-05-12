@@ -1,6 +1,6 @@
 <div class="container">
   
-<div class="container row">
+<div class="container row" *ngIf="weatherData$ | async as weatherData">
   <div class="col-sm container p-3 my-3 bg-primary text-white">           
     <h1>
       {{this.weatherData.list[0].weather[0].main}}

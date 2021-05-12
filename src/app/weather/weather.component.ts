@@ -9,22 +9,20 @@ import { ApixuService } from "../apixu.service";
 })
 
 export class WeatherComponent implements OnInit {
-  public weatherData: any;
-  public $data: Observable<any>;
+  public weatherData$!: Observable<any>;
+  public locationname!: string;
 
   constructor(
     private apixuService: ApixuService
-  ) {
-    this.$data = this.weatherData;
+  ) {               
+    this.locationname = "Tel Aviv";    
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.weatherData$ = this.apixuService.getWeather(this.locationname); 
   }
 
-  sendToAPIXU(formValues: any) {
-    this.apixuService.getWeather(formValues.location).subscribe(data => {
-      this.weatherData = data;
-      console.log(this.weatherData);
-    });
-  }
+  public sendToAPIXU(formValues: any) {
+    this.locationname = formValues.location;            
+  }  
 }
