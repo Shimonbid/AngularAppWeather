@@ -2,9 +2,10 @@
 
 Get Wheather by city in angular with API Service (openweathermap.org).
 
-### The User Scenario
-1. User(city) => HttpClient(OpenWeathermapAPI)
-2. HttpClient(OpenWeathermapAPI) => Angular(json) => User(view)
+### The Process
+1. User(city) => AppComponent(City) => Route(WeatherComponent: locationName)
+2. WeatherComponent(Service) => HttpClient(OpenWeathermapAPI)
+3. WeatherComponent(Observable) => User(view)
 
 ### Development Enviroment
 1. Visual Studio Code (Client)
@@ -22,25 +23,20 @@ Get Wheather by city in angular with API Service (openweathermap.org).
 3. angular.json => "styles" => "node_modules/bootstrap/dist/css/bootstrap.css"
 4. angular.json => "scripts" => "node_modules/jquery/dist/jquery.slim.js", "node_modules/popper.js/dist/umd/popper.js", "node_modules/bootstrap/dist/js/bootstrap.js"
 
-### Weather Component
-1. Create weather component and routes 
-2. create weather => cmd>> ng generate component weather
-3. create file => src/app/routes.ts => import { Routes } from "@angular/router"; => import { WeatherComponent } from "./weather/weather.component"; => export const allAppRoutes: Routes = [{ path: '', component: WeatherComponent }];
-4. src/app/app.module.ts => import {WeatherComponent} from './weather/weather.component'; => import {RouterModule} from '@angular/router'; => import {allAppRoutes} from './routes'; => RouterModule.forRoot(allAppRoutes)
-5. src/app/app.component.html => router-outlet></router-outlet
+### AppComponent
+1. Dynamic Dropdown by Observable
+2. Value Change Check and get value
+3. Route to WeaterComponent with locationName
 
-### Form Wired
-1. Create form wired for service
-2. src/app/app.module.ts => import { ReactiveFormsModule } from '@angular/forms'; => ReactiveFormsModule
-3. src/app/weather/weather.component.ts => import { FormBuilder, FormGroup } from '@angular/forms'; => public weatherSearchForm: FormGroup; => constructor(private formBuilder: FormBuilder) {this.weatherSearchForm = this.formBuilder.group({location: ['']});
-4. src/app/weather/weather.component.html => add form => [formGroup]="weatherSearchForm" => (ngSubmit)="sendToAPIXU(weatherSearchForm.value)" => formControlName="location"
+### WeatherComponent
+1. Create weather component: cmd>> ng generate component weather
+2. Get Weater from service and save in weatherData$
+3. weatherData$ is Observable of Htmlshow
 
 ### APIXU API
-1. Create service with httpclient
-2. src/app/app.module.ts => import { HttpClientModule } from '@angular/common/http'; => HttpClientModule
-3. create service => cmd>> ng g service apixu
-4. src/app/apixu.service.ts => import { HttpClient } from '@angular/common/http'; => Regist openweathermap.org and get appid after 2 hours is ready => Link => getWeather(location: any) {return this.http.get(api.openweathermap.org/data/2.5/forecast?appid=123456&q= + location);
-5. src/app/weather.component.ts => import { ApixuService } from "../apixu.service"; => public weatherData: any; => private apixuService: ApixuService => sendToAPIXU(formValues){this.apixuService.getWeather(formValues.location).subscribe(data => this.weatherData = data);}
+1. create service => cmd>> ng g service apixu
+2. Regist openweathermap.org and get appid after 2 hours is ready
+3. HttpClient for get from serviec
 
 ### Html Data
 1. Create html data by weatherData json from service
