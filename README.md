@@ -3,9 +3,8 @@
 Get Wheather by city in angular with API Service (openweathermap.org).
 
 ### The Process
-1. User(city) => AppComponent(City) => Route(WeatherComponent: locationName)
-2. WeatherComponent(Service) => HttpClient(OpenWeathermapAPI)
-3. WeatherComponent(Observable) => User(view)
+1. AppComponent(Dropdown(value)) => WeatherComponent(locatoinName) => Service(apixu: OpenWeathermapAPI)
+2. Service(getWeather: Observable) => WeatherComponent(weatherData$ bind getWeather)=> WeatherComponent(weatherData$: Observable bind html)
 
 ### Development Enviroment
 1. Visual Studio Code (Client)
@@ -24,22 +23,21 @@ Get Wheather by city in angular with API Service (openweathermap.org).
 4. angular.json => "scripts" => "node_modules/jquery/dist/jquery.slim.js", "node_modules/popper.js/dist/umd/popper.js", "node_modules/bootstrap/dist/js/bootstrap.js"
 
 ### AppComponent
-1. Dynamic Dropdown by Observable
-2. Value Change Check and get value
-3. Route to WeaterComponent with locationName
+1. Dynamic Dropdown with subscribe to valuechanges
+2. Route to WeaterComponent with locationName
 
 ### WeatherComponent
 1. Create weather component: cmd>> ng generate component weather
-2. Get Weater from service and save in weatherData$
-3. weatherData$ is Observable of Htmlshow
+2. Get Weather from service and bind to weatherData$ (getWeather: observable <=> weatherData$: observable)
+3. weatherData$ is Observable of html (weatherData$: observable <=> html: async)
 
 ### APIXU API
 1. create service => cmd>> ng g service apixu
 2. Regist openweathermap.org and get appid after 2 hours is ready
-3. HttpClient for get from serviec
+3. HttpClient for get forecast from service (getWeather: observable)
 
 ### Html Data
-1. Create html data by weatherData json from service
+1. Create html data by weatherData
 2. src/app/weather/weather.component.html
 3. State = {{this.weatherData.list[0].weather[0].main}}
 4. Icon = openweathermap.org/img/w/{{this.weatherData.list[0].weather[0].icon}}.png
