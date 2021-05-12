@@ -1,6 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { ActivatedRoute } from "@angular/router";
 import { ApixuService } from "../apixu.service";
+import { Observable } from "rxjs";
+import { map, filter, concatMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: "app-weather",
@@ -10,19 +12,18 @@ import { ApixuService } from "../apixu.service";
 
 export class WeatherComponent implements OnInit {
   public weatherData$!: Observable<any>;
-  public locationname!: string;
 
   constructor(
-    private apixuService: ApixuService
+    private apixuService: ApixuService,
+    private route: ActivatedRoute
   ) {               
-    this.locationname = "Tel Aviv";    
   }
 
-  ngOnInit() {    
-    this.weatherData$ = this.apixuService.getWeather(this.locationname); 
+  ngOnInit() {
+    this.weatherData$ = this.route.params.pipe(
+      map(params => params["locationName"]),
+      filter(name => !!name),
+      concatMap(name => this.apixuService.getWeather(name))
+    );
   }
-
-  public sendToAPIXU(formValues: any) {
-    this.locationname = formValues.location;            
-  }  
 }

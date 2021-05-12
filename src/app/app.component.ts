@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { ApixuService } from './apixu.service';
-import { WeatherComponent } from './weather/weather.component';
+import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,22 +8,17 @@ import { WeatherComponent } from './weather/weather.component';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
-  public weatherSearchForm: FormGroup;
-  public WeatherComponent1: WeatherComponent;
+export class AppComponent implements OnInit {
+  public cities = ["Tel Aviv", "Paris", "Madrid", "New York", "London"];  
+  public cityControl!: FormControl;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private apixuService: ApixuService
-  ) {
-    this.weatherSearchForm = this.formBuilder.group({
-      location: [""]
-    });     
-    
-    this.WeatherComponent1 = new WeatherComponent(apixuService);
-  }
+  constructor(private router: Router) {}
 
-  public Submit(formValues: any) {    
-    this.WeatherComponent1.sendToAPIXU(formValues);    
-  }  
+  ngOnInit() {
+    this.cityControl = new FormControl("");
+    this.cityControl.valueChanges
+      .subscribe(value => {
+        this.router.navigate([value]);
+      });
+  } 
 }
